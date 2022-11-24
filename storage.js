@@ -26,22 +26,27 @@ function setData()
          localStorage.setItem("email_students",JSON.stringify(data_from_l_S));
     }else{
         data_from_l_S=JSON.parse(local_data);
-        data_from_l_S.push(password.value);
-         data_from_l_S.push(email.value);
-         localStorage.setItem("email_students",JSON.stringify(data_from_l_S));
+       
+            if(data_from_l_S.indexOf(email.value) == -1){
+               
+                data_from_l_S.push(password.value);
+                data_from_l_S.push(email.value);
+                localStorage.setItem("email_students",JSON.stringify(data_from_l_S));
+              
+                alert("Data Saved Suucessfully");
+            }else{
+                
+                alert('this email is already exist enter another one');
+               
+            }
+        
     }
-
-    // data_from_l_S.push(local_data);
     
-    console.log(data_from_l_S[0]);
-    // data_from_l_S.push(localStorage.getItem('email_students'));
-    //  data_from_l_S= [localStorage.getItem('email_students')];
-    // data_from_l_S+= [`,{"username": ${email.value},"passwored": ${password.value}}`];
-    //  JSON.parse(data_from_l_S);
-    // json.parse()
+   
+   
 
-
-     alert("Data Saved Suucessfully");
+        // data_from_l_S.indexOf()
+    
 }
 
 var students = [];
@@ -62,12 +67,25 @@ function login(){
           users_details =JSON.parse(local_data);
         // console.log(JSON.parse(local_data));
         for(let i=0;i<users_details.length;i++){
-            if(email_login.value == users_details[i]){
+            var j=i-1;
+            console.log(users_details.length);
+            if(i != 0){
+                j=i-1;
+            }
+            if(email_login.value == users_details[i] && pass_login.value == users_details[j]){
                 // alert('you can login');
                 open('index.html');
+            }else{
+                console.log(users_details[i]);
+                console.log(i,j);
+                console.log(i,j);
+                console.log(users_details[j]);
+                
+                // break;
+                //open('login.html');
             }
         }
     }
-
+    alert('enter correct email or password');
     
 }
