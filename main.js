@@ -4,6 +4,8 @@ let save_question = document.getElementById('save_queations');
 let numberid = [0];
 var index=0;
 var id=1;
+var time=document.getElementById('time').value;
+
 function add_question(){
     var question_div = document.createElement("div");
     question_div.className='question_div';
@@ -32,7 +34,7 @@ function add_question(){
     addChoice.appendChild(addChoice_mark);
 
     choiceArea.appendChild(choiceArea_text);
-    choiceArea.className=`add_Choice${numberid[index]}`;
+    choiceArea.className=`add_Choice`;
 
     option_ques_default.appendChild(default_option);
     option_ques_one.appendChild(choose_question);
@@ -60,8 +62,10 @@ function add_question(){
                 // var 
                 console.log('yes');
                 let choice_content=document.createElement('div');
+                choice_content.className="choice_div";
                 let checkpoint = document.createElement('input');
                 checkpoint.setAttribute('type','checkbox');
+                // checkpoint.value="kk"
                 let anwser_content = document.createElement('input');
                 let delet_choice = document.createElement("span");
                 let deletChoice_mark = document.createTextNode("x");
@@ -114,15 +118,27 @@ function add_question(){
 var array_questions=[];
 var array_answers=[];
 var array_check_answer=[];
+ 
 let all_questions = document.getElementsByClassName('question_text');
 let all_answers = document.getElementsByClassName('answer_text');
+let al_answers = document.getElementsByClassName("choice_div");
+let add_Choice = document.getElementsByClassName("add_Choice");
 let check_answers = document.getElementsByClassName('check_answer');
+const array_choice_answer =new Array(add_Choice.length);
+// var paren = all_answers[0].parentElement.parentNode.firstElementChild
+;;;;;;;;;;;;;;;
+console.log(al_answers);
+console.log(add_Choice);
+console.log(array_choice_answer.length);
 
-
+var ques_answer_length=[];
 
 // console.log(checkpoint.checked);
 function save(){
     
+    // for(let i=0;i<add_Choice.length;i++){
+    //     array_choice_answer.push(i);
+    // }
     for(let i=0;i<all_questions.length;i++){
 
         array_questions.push(all_questions[i].value);
@@ -133,14 +149,26 @@ function save(){
         array_answers.push(all_answers[i].value);
         console.log(all_answers[i].value);
     }
+    for(let i=0;i<add_Choice.length;i++){
+        ques_answer_length.push(add_Choice[i].children.length);
+        for(let j=0;j<add_Choice[i].children.length;j++){
+            array_choice_answer.push(add_Choice[i].children[j].lastChild.value);
+            
+        }
+       
+        // array_answers.push(all_answers[i].value);
+        // console.log(all_answers[i].value);
+    }
     for(let i=0;i<check_answers.length;i++){
 
         array_check_answer.push(check_answers[i].checked);
         console.log(check_answers[i].value);
     }
+    console.log(array_choice_answer);
     localStorage.setItem("question_text",JSON.stringify(array_questions));
-    localStorage.setItem("answer_text",JSON.stringify(array_answers));
+    localStorage.setItem("answer_text",JSON.stringify(array_choice_answer));
     localStorage.setItem("check_answer",JSON.stringify(array_check_answer));
+    localStorage.setItem("ques_answer_length",JSON.stringify(ques_answer_length));
 
 };
 // var choice_specific_Area = document.getElementsByClassName(`choiceArea${numberid[index]}`);

@@ -13,11 +13,7 @@
 			color: #d9dfeb;
 			padding: 4px;
 		}
-		#alert{
-			background-color: red;
-			color: white;
-			display: none;
-		}
+
 		#signup_button{
 
 			background-color: #42b72a;
@@ -26,6 +22,11 @@
 			padding:4px;
 			border-radius: 4px;
 			float:right;
+		}
+		#alert{
+			background-color: red;
+			color: white;
+			display: none;
 		}
 
 		#bar2{
@@ -69,7 +70,7 @@
 		<div id="bar">
 
 			<!-- <div style="font-size: 40px;">Mybook</div> -->
-			<a href="signup.html">
+			<a href="signup2.html">
 			<div id="signup_button">Signup</div>
 			</a>
 		</div>
@@ -77,14 +78,15 @@
 		<div id="bar2">
 			
 			<!-- <form method="post"> -->
-				<div id="alert" class="alert"> enter correct email or password</div>
+				<div id="alert" class="alert">enter correct email or password</div>
 				Log in to Exam<br><br>
+				<!-- //<form action="questions.html" method="get"> -->
+				<input name="email"  type="text" id="email_student_login" placeholder="Email"><br><br>
+				<input name="password"  type="password" id="pass_student_login" placeholder="Password"><br><br>
 
-				<input name="email"  type="text" id="email_login" placeholder="Email"><br><br>
-				<input name="password"  type="password" id="pass_login" placeholder="Password"><br><br>
-
-				<input type="submit" id="button" onclick="login()" value="Log in">
+				<input type="submit" id="button" onclick="student_login()" value="Log in">
 				<br><br><br>
+			<!-- </form> -->
 
 			<!-- </form> -->
 		</div>
