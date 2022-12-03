@@ -6,13 +6,46 @@ var names = query.match(rule);
 var student_data =localStorage.getItem('email_students');
 var student_datas =JSON.parse(student_data);
 
-var choice_content  = document.createElement("div");
+var show_time  = document.createElement("div");
 
+
+var timers=localStorage.getItem('timer');
+console.log(timers);
+var timers_by_seconds1=timers*60;
+var timers_by_seconds2=timers_by_seconds1;
+var hours=Math.floor(timers_by_seconds2/(60*60));
+timers_by_seconds2=timers_by_seconds2%(60*60);
+var minutes = Math.floor(timers_by_seconds2/60);
+timers_by_seconds2=timers_by_seconds2%60
+var seconds = timers_by_seconds2;
+console.log(hours,':',minutes,':',seconds);
+setInterval(function(){
+    timers_by_seconds1--;
+     timers_by_seconds2=timers_by_seconds1;
+ hours=Math.floor(timers_by_seconds2/(60*60));
+timers_by_seconds2=timers_by_seconds2%(60*60);
+ minutes = Math.floor(timers_by_seconds2/60);
+timers_by_seconds2=timers_by_seconds2%60
+ seconds = timers_by_seconds2;
+ console.log(hours,':',minutes,':',seconds);
+     show_time.innerHTML= hours+':'+minutes+':'+seconds;
+    //var date = new Date().getTime();
+    if(timers_by_seconds1==0)
+    {
+        submit();
+    }
+},1000)
+var choice_content  = document.createElement("div");
 var question_text =localStorage.getItem('question_text');
 var answer_text =localStorage.getItem('answer_text');
 var ques_answer_length =localStorage.getItem('ques_answer_length');
 var check_answer =localStorage.getItem('check_answer');
-
+var catigory_subject=localStorage.getItem('subject');
+var catigory  = document.createElement("div");
+var catigory_title =document.createTextNode(catigory_subject);
+catigory.appendChild(catigory_title);
+question_div.appendChild(catigory);
+question_div.appendChild(show_time);
 var check_answer_array =JSON.parse(check_answer);
 var question_array =JSON.parse(question_text);
 var answers_array =JSON.parse(answer_text);
@@ -25,6 +58,7 @@ console.log(question_array);
 console.log(answer_text);
     var array_quest=[];
     var array_answers=[];
+    var array_label_answers=[];
     var array_answers_span=[];
     var array_answer_text=[];
     var array_quest_text=[];
@@ -51,31 +85,36 @@ console.log(answers_array);
 //     }
 // }
 var arrange=['a','b','c','d','e','f','g'];
-
+var g=0;
     var array_status_answer=[];
 // var answer_content=document.getElementsByClassName('answer_content');
     var question_content=document.getElementsByClassName('question_content');
     for(let i=0;i<question_content.length;i++){
-        var g=0;
+       
        console.log(question_content[i]);
         for(let j=0;j<ques_answers_length[i];j++){
 
             
             array_answers[g] = document.createElement("div");
+            array_label_answers[g] = document.createElement("label");
+            array_label_answers[g].setAttribute('for',`${g}`);
             array_status_answer[g] = document.createElement("input");
             array_status_answer[g].setAttribute('type','radio');
             array_status_answer[g].setAttribute('data_answer',check_answer_array[g]);
+            array_status_answer[g].setAttribute('name',`answer_name${i}`);
+            array_status_answer[g].setAttribute('id',`${g}`);
             array_answers_span[g] = document.createElement("span");
             // array_status_answer[g].value=check_answer_array[g]
             array_answer_text[g] = document.createTextNode(`${arrange[j]}: ${answers_array[g]}`);
             array_answers_span[g].appendChild(array_answer_text[g]);
-            array_answers[g].appendChild(array_status_answer[g]);
-            array_answers[g].appendChild(array_answers_span[g]);
+            array_label_answers[g].appendChild(array_status_answer[g]);
+            array_label_answers[g].appendChild(array_answers_span[g]);
+            array_answers[g].appendChild(array_label_answers[g]);
             array_answers[g].className="answer_content";
             array_status_answer[g].className="answer_checked";
             question_content[i].appendChild(array_answers[g]);
             // question_div.appendChild(question_content[i]);
-            //console.log(array_answers[g]);
+            console.log(g);
             g++;
         }
     }

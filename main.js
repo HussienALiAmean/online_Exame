@@ -4,7 +4,7 @@ let save_question = document.getElementById('save_queations');
 let numberid = [0];
 var index=0;
 var id=1;
-var time=document.getElementById('time').value;
+
 
 function add_question(){
     var question_div = document.createElement("div");
@@ -118,7 +118,12 @@ function add_question(){
 var array_questions=[];
 var array_answers=[];
 var array_check_answer=[];
- 
+var Subject=document.getElementById('subject');
+var subject_title; 
+function choose_subject(){
+    console.log(Subject.value);
+    subject_title=Subject.value;
+}
 let all_questions = document.getElementsByClassName('question_text');
 let all_answers = document.getElementsByClassName('answer_text');
 let al_answers = document.getElementsByClassName("choice_div");
@@ -164,12 +169,15 @@ function save(){
         array_check_answer.push(check_answers[i].checked);
         console.log(check_answers[i].value);
     }
+    var time=document.getElementById('time').value;
     console.log(array_choice_answer);
     localStorage.setItem("question_text",JSON.stringify(array_questions));
     localStorage.setItem("answer_text",JSON.stringify(array_choice_answer));
     localStorage.setItem("check_answer",JSON.stringify(array_check_answer));
     localStorage.setItem("ques_answer_length",JSON.stringify(ques_answer_length));
-
+    localStorage.setItem("subject",subject_title);
+    localStorage.setItem("timer",time);
+    open('questions.html','self');
 };
 // var choice_specific_Area = document.getElementsByClassName(`choiceArea${numberid[index]}`);
 
