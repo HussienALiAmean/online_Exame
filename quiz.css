@@ -1,9 +1,19 @@
 .container{
     margin: auto;
 }
-.question_div{
+#question_div{
     margin: auto;
-    color :blueviolet;
+    width: 50%;
+    background-color: rgb(1, 0, 7);
+    border: 2px solid blue;
+    padding: 28px;
+    /*color :blueviolet; */
+}
+.timer{
+    color: white;
+    font-weight: bold;
+    background-color: red;
+    padding: 2px;
 }
 .question_content {
     font-weight:bold;
@@ -12,10 +22,29 @@
     margin:auto;
     /* margin-left: 10px; */
     margin-bottom: 6px;
-    background-color: rgb(97, 177, 177);
+    background-color: rgb(82, 177, 236);
     color: aliceblue;
     border-radius: 15px;
-    width: 50%;
+    width: 100%;
+    
+}
+#result{
+    color: white;
+    border-radius: 7px;
+    float: left;
+    background-color: blue;
+}
+.catigory{
+    /* display: inline; */
+    /* float: right; */
+    text-align: center;
+    font-size: 22px;
+    color: white;
+}
+.student{
+    display: inline;
+    font-size: 22px;
+    color: white;
 }
 .answer_content{
     color: black;
@@ -26,9 +55,13 @@
     background-color: rgb(94, 93, 93);
 }
 #submit{
-    width: 58px;
+    width: 70px;
     border-radius: 2px;
-
+    color: white;
+    padding: 5px;
+    border-radius: 7px;
+    float: right;
     margin: auto;
+    background-color: rgb(13, 248, 240);
 
 }

@@ -3,22 +3,33 @@ var email = document.getElementById("email");
 var password = document.getElementById("password");
 var email_student = document.getElementById("email_student");
 var password_student = document.getElementById("password_student");
-
+var person =document.getElementById('person');
 var student_data = localStorage.getItem('student_data');
 var local_data = localStorage.getItem('email_students');
-var data_from_l_S=[];
+var storage_person_type=localStorage.getItem('person_type');
+var data_from_Instructor=[];
 var data_student=[];
-console.log(data_from_l_S);
+console.log(data_from_Instructor);
+var person_type;
+function choose_role(){
+     person_type=person.value;
+     console.log(person_type);
+    localStorage.setItem('person_type',person_type);
+}
 function setStudent()
    { 
     
-    
+   
     //  console.log(json.parse(local_data));
     
     if(student_data == null){
-        data_student.push(password_student.value);
-        data_student.push(email_student.value);
-         localStorage.setItem("student_data",JSON.stringify(data_student));
+        if(person_type == 'Student'){
+
+            data_student.push(password_student.value);
+            data_student.push(email_student.value);
+            data_student.push(person_type);
+             localStorage.setItem("student_data",JSON.stringify(data_student));
+        }
     }else{
         data_student=JSON.parse(student_data);
        
@@ -26,6 +37,7 @@ function setStudent()
                
                 data_student.push(password_student.value);
                 data_student.push(email_student.value);
+                data_student.push(person_type);
                 localStorage.setItem("student_data",JSON.stringify(data_student));
               
                 alert("Data Saved Suucessfully");
@@ -40,7 +52,7 @@ function setStudent()
    
    
 
-        // data_from_l_S.indexOf()
+        // data_from_Instructor.indexOf()
     
 }
 
@@ -48,29 +60,25 @@ function setData()
    { 
     
     // localStorage.clear();
-    var json = '{"users":{"test1":""}}';
-    var obj  = JSON.parse(json);
-    var newuser = 'test4';
-    obj.users[email.value] = `${password.value}`;
     
-    JSON.stringify(obj);
-    //=> {"users":{"test1":{},"test2":{},"test3":{}}}
-   
-     console.log(local_data);
     //  console.log(json.parse(local_data));
     
     if(local_data == null){
-        data_from_l_S.push(password.value);
-         data_from_l_S.push(email.value);
-         localStorage.setItem("email_students",JSON.stringify(data_from_l_S));
+        if(person_type == 'Instructor'){
+        data_from_Instructor.push(password_student.value);
+         data_from_Instructor.push(email_student.value);
+         data_from_Instructor.push(person_type);
+         localStorage.setItem("email_students",JSON.stringify(data_from_Instructor));
+        }
     }else{
-        data_from_l_S=JSON.parse(local_data);
+        data_from_Instructor=JSON.parse(local_data);
        
-            if(data_from_l_S.indexOf(email.value) == -1){
+            if(data_from_Instructor.indexOf(email_student.value) == -1){
                
-                data_from_l_S.push(password.value);
-                data_from_l_S.push(email.value);
-                localStorage.setItem("email_students",JSON.stringify(data_from_l_S));
+                data_from_Instructor.push(password_student.value);
+                data_from_Instructor.push(email_student.value);
+                data_from_Instructor.push(person_type);
+                localStorage.setItem("email_students",JSON.stringify(data_from_Instructor));
               
                 alert("Data Saved Suucessfully");
             }else{
@@ -84,15 +92,29 @@ function setData()
    
    
 
-        // data_from_l_S.indexOf()
+        // data_from_Instructor.indexOf()
     
 }
 
+function Login(){
+    if(person_type == 'Student'){
+        student_login();
+    }else{
+        login();
+    }
+}
+function Signup(){
+    if(person_type == 'Student'){
+        setStudent();
+    }else{
+        setData();
+    }
+}
 var students = [];
 
 students.push(localStorage.getItem('email_students'));
 console.log(students);
-
+var form=document.getElementById('form');
 
 var email_login = document.getElementById('email_login');
 var pass_login = document.getElementById('pass_login');
@@ -100,11 +122,16 @@ var email_student_login = document.getElementById('email_student_login');
 var pass_student_login = document.getElementById('pass_student_login');
 var studentName;
 
-           
+// form.setAttribute('style','display:none;');
           
-
+    function submit_name()
+    {
+        form.setAttribute('method','get');
+        form.setAttribute('action','questions.html');
+    }
+    
 function student_login(){
-    // console.log(data_from_l_S);
+    // console.log(data_from_Instructor);
     var student_details = [];
     if(data_student == null){
         alert('please signup');
@@ -120,8 +147,11 @@ function student_login(){
             if(email_student_login.value == student_details[i] && pass_student_login.value == student_details[j]){
                 // alert('you can login');
                 studentName=email_student_login.value;
-                open('questions.html','self');
-
+                // form.setAttribute('style','display:block;');
+                
+                submit_name();
+                
+                open('questions.html?','self');
             }
            else {
             //     console.log(student_details[i]);
@@ -132,7 +162,7 @@ function student_login(){
             //     // break;
             //     //open('login.html');
             let alerts=document.getElementById('alert');
-           
+            // form.setAttribute('style','display:none;');
             setTimeout(function(){
                 alerts.setAttribute('style','display:block;');
             },500);
@@ -148,9 +178,9 @@ function student_login(){
 }
 
 function login(){
-    console.log(data_from_l_S);
+    console.log(data_from_Instructor);
     var users_details = [];
-    if(data_from_l_S == null){
+    if(data_from_Instructor == null){
         alert('please signup');
     }else{
           users_details =JSON.parse(local_data);
@@ -161,18 +191,20 @@ function login(){
             if(i != 0){
                 j=i-1;
             }
-            if(email_login.value == users_details[i] && pass_login.value == users_details[j]){
+            if(email_student_login.value == users_details[i] && pass_student_login.value == users_details[j]){
                 // alert('you can login');
+                // form.setAttribute('style','display:block;');
                 open('index.html','self');
             }
              else {
+                 
             //     console.log(users_details[i]);
             //     console.log(i,j);
             //     console.log(i,j);
             //     console.log(users_details[j]);
                 
             let alerts=document.getElementById('alert');
-           
+            // form.setAttribute('style','display:none;');
             setTimeout(function(){
                 alerts.setAttribute('style','display:block;');
             },500);
@@ -188,3 +220,6 @@ function login(){
     }
     
 }
+// var button_login=document.getElementById('button_login');
+// button_login.addEventListener('click',Login());
+

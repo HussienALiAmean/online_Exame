@@ -18,10 +18,14 @@
 
 			background-color: #42b72a;
 			width: 70px;
+			color: white;
 			text-align: center;
 			padding:4px;
 			border-radius: 4px;
 			float:right;
+			position: relative;
+			top: 66%;
+    		padding: 8px;
 		}
 		#alert{
 			background-color: red;
@@ -52,7 +56,7 @@
 			font-size: 14px;
 		}
 
-		#button{
+		#button_login{
 
 			width: 300px;
 			height: 40px;
@@ -77,18 +81,25 @@
 
 		<div id="bar2">
 			
-			<!-- <form method="post"> -->
+			<form method="get" id="form" >
 				<div id="alert" class="alert">enter correct email or password</div>
 				Log in to Exam<br><br>
+
+				<select name="" id="person" onclick="choose_role()">
+					<option value="Instructor">Instructor</option>
+					<option value="Student">Student</option>
+				</select> <br><br>
 				<!-- //<form action="questions.html" method="get"> -->
-				<input name="email"  type="text" id="email_student_login" placeholder="Email"><br><br>
+				<input name="email"  type="text" id="email_student_login" placeholder="Your Name"><br><br>
+				
 				<input name="password"  type="password" id="pass_student_login" placeholder="Password"><br><br>
-
-				<input type="submit" id="button" onclick="student_login()" value="Log in">
+				<input type="submit" id="submit_form" style="display: none;"  onclick="submit_name()">
+			</form>
+			<input type="submit" id="button_login" onclick="Login(),submit_name()"  value="Log in">
 				<br><br><br>
-			<!-- </form> -->
+			
 
-			<!-- </form> -->
+			<!-- </form> onclick="Login()" -->
 		</div>
 		<script src="storage.js"></script>
 	</body>

@@ -2,12 +2,12 @@ var question_div = document.getElementById('question_div');
 var query=location.search;
 var rule = /([a-z]+)/g;
 var names = query.match(rule);
-//var fulname=names.slice(1,2);
+// var fulname=names.slice(1,2);
 var student_data =localStorage.getItem('email_students');
 var student_datas =JSON.parse(student_data);
-
+var result = document.getElementById('result');
 var show_time  = document.createElement("div");
-
+show_time.className='timer';
 
 var timers=localStorage.getItem('timer');
 console.log(timers);
@@ -28,7 +28,7 @@ timers_by_seconds2=timers_by_seconds2%(60*60);
 timers_by_seconds2=timers_by_seconds2%60
  seconds = timers_by_seconds2;
  console.log(hours,':',minutes,':',seconds);
-     show_time.innerHTML= hours+':'+minutes+':'+seconds;
+     show_time.innerHTML= 'Timer : '+hours+':'+minutes+':'+seconds;
     //var date = new Date().getTime();
     if(timers_by_seconds1==0)
     {
@@ -42,8 +42,10 @@ var ques_answer_length =localStorage.getItem('ques_answer_length');
 var check_answer =localStorage.getItem('check_answer');
 var catigory_subject=localStorage.getItem('subject');
 var catigory  = document.createElement("div");
-var catigory_title =document.createTextNode(catigory_subject);
+catigory.className='catigory';
+var catigory_title =document.createTextNode('Catigory : '+catigory_subject);
 catigory.appendChild(catigory_title);
+show_time.style.float='right';
 question_div.appendChild(catigory);
 question_div.appendChild(show_time);
 var check_answer_array =JSON.parse(check_answer);
@@ -51,8 +53,9 @@ var question_array =JSON.parse(question_text);
 var answers_array =JSON.parse(answer_text);
 var ques_answers_length =JSON.parse(ques_answer_length);
 var student_name=document.createElement('div');
-//var student_name_text=document.createTextNode(fulname);
-//student_name.appendChild(student_name_text);
+student_name.className='student';
+// var student_name_text=document.createTextNode('Your Name : '+fulname);
+// student_name.appendChild(student_name_text);
 question_div.appendChild(student_name);
 console.log(question_array);
 console.log(answer_text);
@@ -121,13 +124,20 @@ var g=0;
     // question_content.appendChild(answer_content);
     // question_div.appendChild(question_content);
 
-    var bb=document.createElement('input');
-    bb.setAttribute('type','checkbox');
-    bb.value='hello ';
+    // var bb=document.createElement('input');
+    // bb.setAttribute('type','checkbox');
+    // bb.value='hello ';
     
 
     var grades=0;
     var answers_checked=document.getElementsByClassName('answer_checked');
+    var button =document.createElement('button');
+    var button_text=document.createTextNode('Submit');
+    button.appendChild(button_text);
+    button.setAttribute('id','submit');
+    button.setAttribute('onclick','submit()');
+    question_div.appendChild(button);
+
     function submit(){
         for(let i=0;i<answers_checked.length;i++){
             console.log(answers_checked[i].checked);
@@ -140,5 +150,8 @@ var g=0;
                 console.log('bad');
             }
         }
-        document.write('your total score is '+ grades +'/'+question_content.length);
+        var result_text=document.createTextNode('your total score is '+ grades +'/'+question_content.length);
+        result.appendChild(result_text);
+        show_time.setAttribute('style','display:none;');
+        // document.write('your total score is '+ grades +'/'+question_content.length);
     }

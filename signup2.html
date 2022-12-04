@@ -18,10 +18,14 @@
 
 			background-color: #42b72a;
 			width: 70px;
+			color: white;
 			text-align: center;
 			padding:4px;
 			border-radius: 4px;
 			float:right;
+			position: relative;
+			top: 66%;
+    		padding: 8px;
 		}
 
 		#bar2{
@@ -47,7 +51,7 @@
 			font-size: 14px;
 		}
 
-		#button{
+		#button_student{
 
 			width: 300px;
 			height: 40px;
@@ -76,12 +80,15 @@
 
 			<!-- <form method="post" action=""> -->
 
-			
-				<input  name="email" type="text" id="email_student" placeholder="Email"><br><br>
+				<select name="" id="person" onclick="choose_role()">
+					<option value="Instructor">Instructor</option>
+					<option value="Student">Student</option>
+				</select> <br><br>
+				<input  name="email" type="text" id="email_student" placeholder="Your Name"><br><br>
 				
 				<input name="password" type="password" id="password_student" placeholder="Password"><br><br>
 			
-				<input type="submit" id="button_student" onclick="setStudent()" value="Sign up">
+				<input type="submit" id="button_student" onclick="Signup()" value="Sign up">
 				<br><br><br>
 
 			<!-- </form> -->
