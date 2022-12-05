@@ -6,6 +6,7 @@ var fulname=names.slice(1,2);
 var student_data =localStorage.getItem('email_students');
 var student_datas =JSON.parse(student_data);
 var result = document.getElementById('result');
+result.setAttribute('style','display:none;');
 var show_time  = document.createElement("div");
 show_time.className='timer';
 
@@ -152,6 +153,7 @@ var g=0;
         }
         var result_text=document.createTextNode('your total score is '+ grades +'/'+question_content.length);
         result.appendChild(result_text);
+        result.setAttribute('style','display:block;');
         show_time.setAttribute('style','display:none;');
         // document.write('your total score is '+ grades +'/'+question_content.length);
     }

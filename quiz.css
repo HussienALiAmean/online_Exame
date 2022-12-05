@@ -34,7 +34,8 @@
     float: left;
     font-weight: bold;
     font-size: 22px;
-    width: 70px;
+    width: auto;
+    padding: 4px;
     background-color: blue;
 }
 .catigory{
