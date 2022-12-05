@@ -30,8 +30,11 @@
 }
 #result{
     color: white;
-    border-radius: 7px;
+    /* border-radius: 7px; */
     float: left;
+    font-weight: bold;
+    font-size: 22px;
+    width: 70px;
     background-color: blue;
 }
 .catigory{
@@ -40,6 +43,7 @@
     text-align: center;
     font-size: 22px;
     color: white;
+    margin-top: 27px;
 }
 .student{
     display: inline;
@@ -64,4 +68,7 @@
     margin: auto;
     background-color: rgb(13, 248, 240);
 
+}
+body{
+    background-color: blueviolet;
 }

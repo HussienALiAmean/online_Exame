@@ -151,7 +151,7 @@ function student_login(){
                 
                 submit_name();
                 
-                open('questions.html?','self');
+                open('questions.html?name='+email_student_login.value,'self');
             }
            else {
             //     console.log(student_details[i]);
