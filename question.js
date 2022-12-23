@@ -156,7 +156,13 @@ var g=0;
         }
         var result_text=document.createTextNode('your total score is '+ grades +'/'+question_content.length);
         result.appendChild(result_text);
-        result.setAttribute('style','display:block;');
+        if(result.style.display== 'none'){
+
+            result.setAttribute('style','display:block;');
+        }else{
+            result.setAttribute('style','display:none;');
+
+        }
         show_time.setAttribute('style','display:none;');
-        // document.write('your total score is '+ grades +'/'+question_content.length);
+        button.setAttribute('style','display:none;');
     }

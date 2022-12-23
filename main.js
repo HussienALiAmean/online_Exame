@@ -9,8 +9,16 @@ var id=1;
 function add_question(){
     var question_div = document.createElement("div");
     question_div.className='question_div';
+    let ques_label = document.createElement('label');
+    ques_label.style.display='block';
+    let ques_label_text=document.createTextNode('Enter Question');
+    ques_label.appendChild(ques_label_text);
     let ques_input = document.createElement("input");
+    ques_input.style.display='inline';
+    ques_label.appendChild(ques_input);
     let select_ques_type = document.createElement("select");
+    select_ques_type.style.marginTop='9px';
+    select_ques_type.className='question_type';
     let option_ques_one = document.createElement("option");
     let option_ques_two = document.createElement("option");
     let option_ques_default = document.createElement("option");
@@ -21,6 +29,7 @@ function add_question(){
     let delet = document.createElement("button");
     let addChoice = document.createElement("button");
     let choiceArea = document.createElement("div");
+    choiceArea.style.margin='5px 0px';
     let choiceArea_text = document.createTextNode("choiceArea");
     let addChoice_mark = document.createTextNode("Add choices");
     let delet_ques = document.createTextNode("X");
@@ -37,6 +46,9 @@ function add_question(){
     choiceArea.className=`add_Choice`;
 
     option_ques_default.appendChild(default_option);
+    option_ques_default.setAttribute('value','choose_question');
+    option_ques_one.setAttribute('value','choose_question');
+    option_ques_two.setAttribute('value','essay_question');
     option_ques_one.appendChild(choose_question);
     option_ques_two.appendChild(essay_question);
 
@@ -45,7 +57,7 @@ function add_question(){
     select_ques_type.appendChild(option_ques_two);
 
     question_div.appendChild(select_ques_type);
-    question_div.appendChild(ques_input);
+    question_div.appendChild(ques_label);
     question_div.appendChild(addChoice);
     delet.className='delete_question';
     delet.appendChild(delet_ques);
@@ -63,10 +75,15 @@ function add_question(){
                 console.log('yes');
                 let choice_content=document.createElement('div');
                 choice_content.className="choice_div";
+                if(select_ques_type.value== 'choose_question'){
+                    var answer_content_type= 'input';
+                }else{
+                    var  answer_content_type='textarea';
+                }
                 let checkpoint = document.createElement('input');
                 checkpoint.setAttribute('type','checkbox');
                 // checkpoint.value="kk"
-                let anwser_content = document.createElement('input');
+                let anwser_content = document.createElement(answer_content_type);
                 let delet_choice = document.createElement("span");
                 let deletChoice_mark = document.createTextNode("x");
                 checkpoint.className="check_answer";

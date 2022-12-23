@@ -11,15 +11,17 @@
     <div class="navbar">
     </div>
     <div class="container">
-        
-        <select name="" id="subject" onclick="choose_subject()" >
-            <!-- <option value="0">...</option> -->
-            <option value="js">js</option>
-            <option value="operating system">operating system</option>
-            <option value="client side">client side</option>
-        </select>
-
-        <input type="number" id="time" placeholder="timer by minutes">
+        <label for="" id="select_subject">select subject
+            <select name="" id="subject" onclick="choose_subject()" > 
+                <!-- <option value="0">...</option> -->
+                <option value="js">js</option>
+                <option value="operating system">operating system</option>
+                <option value="client side">client side</option>
+            </select>
+        </label>
+        <label id="label_time" for="">enter exam's time
+            <input type="number" id="time" placeholder="timer by minutes">
+        </label>
         <div id="addquestion" onclick="add_question()">+</div>
         <div id="question_content">   </div>
         <button onclick="save()" id="save_queations"> save</button>
