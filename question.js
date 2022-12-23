@@ -2,7 +2,10 @@ var question_div = document.getElementById('question_div');
 var query=location.search;
 var rule = /([a-z]+)/g;
 var names = query.match(rule);
-var fulname=names.slice(1,2);
+if(names != null){
+    //names=" ";
+    var fulname=names.slice(1,2);
+}
 var student_data =localStorage.getItem('email_students');
 var student_datas =JSON.parse(student_data);
 var result = document.getElementById('result');
