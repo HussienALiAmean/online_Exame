@@ -152,30 +152,38 @@ var r=0;
     button.setAttribute('id','submit');
     button.setAttribute('onclick','submit()');
     question_div.appendChild(button);
-    var v=0;
+    var v=-1;
     var t=0;
     console.log(question_type_array[v]);
     function submit(){
         for(let x=0;x<question_content.length;x++){
        
+            if(question_type_array[0] != 'choose_question'){
+                
+                v=0;
+                console.log(ques_answers_length[x]);
+            }
             if(question_type_array[x] == 'choose_question'){
                 
                 v+=ques_answers_length[x];
                 console.log(ques_answers_length[x]);
-            }
-            
-            
-        }
-        for(let i=0;i<essay_answer.length;i++){
-
-            if(essay_answer[i].value == answers_array[v] ){
-                grades++;
-                console.log('good'+v+answers_array[v]);
             }else{
-                console.log('bad');
+
+               // for(let i=0;i<essay_answer.length;i++){
+        
+                    if(essay_answer[t].value == answers_array[v] ){
+                        grades++;
+                        console.log('good'+v+answers_array[v]);
+                    }else{
+                        console.log('bad');
+                    }
+                    v++;
+                    t++;
+                }
             }
-            v++;
-        }
+            
+            
+        //}
         
         for(let i=0;i<answers_checked.length;i++){
 
