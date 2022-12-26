@@ -7,7 +7,9 @@ if(names != null){
     var fulname=names.slice(1,2);
 }
 var student_data =localStorage.getItem('email_students');
+var question_type =localStorage.getItem('ques_answer_type');
 var student_datas =JSON.parse(student_data);
+var question_type_array =JSON.parse(question_type);
 var result = document.getElementById('result');
 result.setAttribute('style','display:none;');
 var show_time  = document.createElement("div");
@@ -22,7 +24,7 @@ timers_by_seconds2=timers_by_seconds2%(60*60);
 var minutes = Math.floor(timers_by_seconds2/60);
 timers_by_seconds2=timers_by_seconds2%60
 var seconds = timers_by_seconds2;
-console.log(hours,':',minutes,':',seconds);
+// console.log(hours,':',minutes,':',seconds);
 setInterval(function(){
     timers_by_seconds1--;
      timers_by_seconds2=timers_by_seconds1;
@@ -31,7 +33,7 @@ timers_by_seconds2=timers_by_seconds2%(60*60);
  minutes = Math.floor(timers_by_seconds2/60);
 timers_by_seconds2=timers_by_seconds2%60
  seconds = timers_by_seconds2;
- console.log(hours,':',minutes,':',seconds);
+//  console.log(hours,':',minutes,':',seconds);
      show_time.innerHTML= 'Timer : '+hours+':'+minutes+':'+seconds;
     //var date = new Date().getTime();
     if(timers_by_seconds1==0)
@@ -93,11 +95,17 @@ console.log(answers_array);
 // }
 var arrange=['a','b','c','d','e','f','g'];
 var g=0;
+var r=0;
     var array_status_answer=[];
 // var answer_content=document.getElementsByClassName('answer_content');
     var question_content=document.getElementsByClassName('question_content');
     for(let i=0;i<question_content.length;i++){
        
+        if(question_type_array[i] == 'choose_question'){
+            var answer_element='span';
+        }else{
+            var answer_element='input';
+        }
        console.log(question_content[i]);
         for(let j=0;j<ques_answers_length[i];j++){
 
@@ -105,56 +113,84 @@ var g=0;
             array_answers[g] = document.createElement("div");
             array_label_answers[g] = document.createElement("label");
             array_label_answers[g].setAttribute('for',`${g}`);
-            array_status_answer[g] = document.createElement("input");
-            array_status_answer[g].setAttribute('type','radio');
-            array_status_answer[g].setAttribute('data_answer',check_answer_array[g]);
-            array_status_answer[g].setAttribute('name',`answer_name${i}`);
-            array_status_answer[g].setAttribute('id',`${g}`);
-            array_answers_span[g] = document.createElement("span");
+            array_answers_span[g] = document.createElement(answer_element);
             // array_status_answer[g].value=check_answer_array[g]
-            array_answer_text[g] = document.createTextNode(`${arrange[j]}: ${answers_array[g]}`);
-            array_answers_span[g].appendChild(array_answer_text[g]);
-            array_label_answers[g].appendChild(array_status_answer[g]);
+            if(answer_element != 'input' ){
+                array_status_answer[g] = document.createElement("input");
+                array_status_answer[g].setAttribute('type','radio');
+                array_status_answer[g].setAttribute('data_answer',check_answer_array[r]);
+                array_status_answer[g].setAttribute('name',`answer_name${i}`);
+                array_status_answer[g].setAttribute('id',`${g}`);
+                
+                array_answer_text[g] = document.createTextNode(`${arrange[j]}: ${answers_array[g]}`);
+                array_answers_span[g].appendChild(array_answer_text[g]);
+                array_label_answers[g].appendChild(array_status_answer[g]);
+                array_status_answer[g].className="answer_checked";
+                r++;
+            }else{
+                array_answers_span[g].className="essay_answer";
+            }
+            // array_answer_text[g] = document.createTextNode(`${arrange[j]}: ${answers_array[g]}`);
             array_label_answers[g].appendChild(array_answers_span[g]);
             array_answers[g].appendChild(array_label_answers[g]);
             array_answers[g].className="answer_content";
-            array_status_answer[g].className="answer_checked";
             question_content[i].appendChild(array_answers[g]);
             // question_div.appendChild(question_content[i]);
             console.log(g);
             g++;
         }
     }
-    // question_content.appendChild(answer_content);
-    // question_div.appendChild(question_content);
-
-    // var bb=document.createElement('input');
-    // bb.setAttribute('type','checkbox');
-    // bb.value='hello ';
     
 
     var grades=0;
     var answers_checked=document.getElementsByClassName('answer_checked');
+    var essay_answer=document.getElementsByClassName('essay_answer');
     var button =document.createElement('button');
     var button_text=document.createTextNode('Submit');
     button.appendChild(button_text);
     button.setAttribute('id','submit');
     button.setAttribute('onclick','submit()');
     question_div.appendChild(button);
-
+    var v=0;
+    var t=0;
+    console.log(question_type_array[v]);
     function submit(){
-        for(let i=0;i<answers_checked.length;i++){
-            console.log(answers_checked[i].checked);
-            // console.log(answers_checked[i].getAttribute('data_answer'));
-            console.log(check_answer_array[i]);
-            if(answers_checked[i].checked == check_answer_array[i] && answers_checked[i].checked == true){
-                grades++;
-                console.log('good');
+        for(let x=0;x<question_content.length;x++){
+       
+            if(question_type_array[x] == 'choose_question'){
+                for(let i=0;i<ques_answers_length[x].length;i++){
+                    // console.log(answers_checked[i].checked);
+                    // console.log(answers_checked[i].getAttribute('data_answer'));
+                    // console.log(check_answer_array[i]);
+                    if(answers_checked[t].checked == check_answer_array[t] && answers_checked[t].checked == true){
+                        grades++;
+                        document.write(answers_checked[t].checked);
+                        document.write(check_answer_array[t]);
+                        document.write('good');
+                    }else{
+                        console.log('bad');
+                    }
+                    t++;
+                    v++;
+                }
             }else{
-                console.log('bad');
+                for(let i=0;i<ques_answers_length[x].length;i++){
+                    //console.log(answers_checked[i].checked);
+                    // console.log(answers_checked[i].getAttribute('data_answer'));
+                    //console.log(check_answer_array[i]);
+                    if(essay_answer[i].value == answers_array[v] ){
+                        grades++;
+                        console.log('good');
+                    }else{
+                        console.log('bad');
+                    }
+                    v++;
+                }
             }
+            v++;
+            
         }
-        var result_text=document.createTextNode('your total score is '+ grades +'/'+question_content.length);
+        var result_text=document.createTextNode('your total score is '+ grades +'/'+question_content.length +" " );
         result.appendChild(result_text);
         if(result.style.display== 'none'){
 

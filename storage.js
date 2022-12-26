@@ -5,7 +5,7 @@ var email_student = document.getElementById("email_student");
 var password_student = document.getElementById("password_student");
 var person =document.getElementById('person');
 var student_data = localStorage.getItem('student_data');
-var local_data = localStorage.getItem('email_students');
+var instructor_data = localStorage.getItem('email_students');
 var storage_person_type=localStorage.getItem('person_type');
 var data_from_Instructor=[];
 var data_student=[];
@@ -20,7 +20,7 @@ function setStudent()
    { 
     
    
-    //  console.log(json.parse(local_data));
+    //  console.log(json.parse(instructor_data));
     
     if(student_data == null){
         if(person_type == 'Student'){
@@ -61,9 +61,9 @@ function setData()
     
     // localStorage.clear();
     
-    //  console.log(json.parse(local_data));
+    //  console.log(json.parse(instructor_data));
     
-    if(local_data == null){
+    if(instructor_data == null){
         if(person_type == 'Instructor'){
         data_from_Instructor.push(password_student.value);
          data_from_Instructor.push(email_student.value);
@@ -71,7 +71,7 @@ function setData()
          localStorage.setItem("email_students",JSON.stringify(data_from_Instructor));
         }
     }else{
-        data_from_Instructor=JSON.parse(local_data);
+        data_from_Instructor=JSON.parse(instructor_data);
        
             if(data_from_Instructor.indexOf(email_student.value) == -1){
                
@@ -137,7 +137,7 @@ function student_login(){
         alert('please signup');
     }else{
           student_details =JSON.parse(student_data);
-        // console.log(JSON.parse(local_data));
+        // console.log(JSON.parse(instructor_data));
         for(let i=0;i<student_details.length;i++){
             var j=i-1;
             console.log(student_details.length);
@@ -183,8 +183,8 @@ function login(){
     if(data_from_Instructor == null){
         alert('please signup');
     }else{
-          users_details =JSON.parse(local_data);
-        // console.log(JSON.parse(local_data));
+          users_details =JSON.parse(instructor_data);
+        // console.log(JSON.parse(instructor_data));
         for(let i=0;i<users_details.length;i++){
             var j=i-1;
             console.log(users_details.length);

@@ -77,20 +77,20 @@ function add_question(){
                 choice_content.className="choice_div";
                 if(select_ques_type.value== 'choose_question'){
                     var answer_content_type= 'input';
+                    let checkpoint = document.createElement('input');
+                    checkpoint.setAttribute('type','checkbox');
+                    checkpoint.className="check_answer";
+                    choice_content.appendChild(checkpoint);
                 }else{
                     var  answer_content_type='textarea';
                 }
-                let checkpoint = document.createElement('input');
-                checkpoint.setAttribute('type','checkbox');
                 // checkpoint.value="kk"
                 let anwser_content = document.createElement(answer_content_type);
                 let delet_choice = document.createElement("span");
                 let deletChoice_mark = document.createTextNode("x");
-                checkpoint.className="check_answer";
                 delet_choice.className="delet_choice";
                 delet_choice.appendChild(deletChoice_mark);
                 anwser_content.className="answer_text";
-                choice_content.appendChild(checkpoint);
                 choice_content.appendChild(delet_choice);
                 choice_content.appendChild(anwser_content);
                 // var choice_specific_Area = document.getElementsByClassName(`add_Choice${numberid[0]}`);
@@ -129,10 +129,11 @@ function add_question(){
 
         })
     // }
-    id++;
-    index++
+    // id++;
+    // index++
 }
 var array_questions=[];
+var array_questions_type=[];
 var array_answers=[];
 var array_check_answer=[];
 var Subject=document.getElementById('subject');
@@ -142,13 +143,14 @@ function choose_subject(){
     subject_title=Subject.value;
 }
 let all_questions = document.getElementsByClassName('question_text');
+let all_questions_type = document.getElementsByClassName('question_type');
 let all_answers = document.getElementsByClassName('answer_text');
 let al_answers = document.getElementsByClassName("choice_div");
 let add_Choice = document.getElementsByClassName("add_Choice");
 let check_answers = document.getElementsByClassName('check_answer');
 const array_choice_answer =new Array(add_Choice.length);
 // var paren = all_answers[0].parentElement.parentNode.firstElementChild
-;;;;;;;;;;;;;;;
+// ;;;;;;;;;;;;;;;
 console.log(al_answers);
 console.log(add_Choice);
 console.log(array_choice_answer.length);
@@ -158,13 +160,15 @@ var ques_answer_length=[];
 // console.log(checkpoint.checked);
 function save(){
     
-    // for(let i=0;i<add_Choice.length;i++){
-    //     array_choice_answer.push(i);
-    // }
     for(let i=0;i<all_questions.length;i++){
 
         array_questions.push(all_questions[i].value);
         console.log(all_questions[i].value);
+    }
+    for(let i=0;i<all_questions_type.length;i++){
+
+        array_questions_type.push(all_questions_type[i].value);
+        console.log(all_questions_type[i].value);
     }
     for(let i=0;i<all_answers.length;i++){
 
@@ -192,103 +196,8 @@ function save(){
     localStorage.setItem("answer_text",JSON.stringify(array_choice_answer));
     localStorage.setItem("check_answer",JSON.stringify(array_check_answer));
     localStorage.setItem("ques_answer_length",JSON.stringify(ques_answer_length));
+    localStorage.setItem("ques_answer_type",JSON.stringify(array_questions_type));
     localStorage.setItem("subject",subject_title);
     localStorage.setItem("timer",time);
     open('questions.html','self');
 };
-// var choice_specific_Area = document.getElementsByClassName(`choiceArea${numberid[index]}`);
-
-// var i=22;
-// var objREf = {num: [100]};
-// function pointer(obj){
-// obj.num++;
-// }
-// pointer(objREf);
-// pointer(objREf);
-// console.log(objREf.num);
-
-
-// var email = document.getElementById("email");
-// var password = document.getElementById("password");
-// // var emailes=
-// // [
-// //     {
-// //         "username": email.value ,
-// //         "passwored": password.value
-// //     }
-// //     ,
-// //     {
-// //         "username": email.value ,
-// //         "passwored": password.value
-// //     }
-// // ];
-// var local_data = localStorage.getItem('email_students');
-// var data_from_l_S=[];
-// console.log(data_from_l_S);
-// function setData()
-//    { 
-    
-//     // localStorage.clear();
-//     var json = '{"users":{"test1":""}}';
-//     var obj  = JSON.parse(json);
-//     var newuser = 'test4';
-//     obj.users[email.value] = `${password.value}`;
-    
-//     JSON.stringify(obj);
-//     //=> {"users":{"test1":{},"test2":{},"test3":{}}}
-   
-//      console.log(local_data);
-//     //  console.log(json.parse(local_data));
-    
-//     if(local_data == null){
-//         data_from_l_S.push(password.value);
-//          data_from_l_S.push(email.value);
-//          localStorage.setItem("email_students",JSON.stringify(data_from_l_S));
-//     }else{
-//         data_from_l_S=JSON.parse(local_data);
-//         data_from_l_S.push(password.value);
-//          data_from_l_S.push(email.value);
-//          localStorage.setItem("email_students",JSON.stringify(data_from_l_S));
-//     }
-
-//     // data_from_l_S.push(local_data);
-    
-//     console.log(data_from_l_S[0]);
-//     // data_from_l_S.push(localStorage.getItem('email_students'));
-//     //  data_from_l_S= [localStorage.getItem('email_students')];
-//     // data_from_l_S+= [`,{"username": ${email.value},"passwored": ${password.value}}`];
-//     //  JSON.parse(data_from_l_S);
-//     // json.parse()
-
-
-//      alert("Data Saved Suucessfully");
-// }
-
-// var students = [];
-
-// students.push(localStorage.getItem('email_students'));
-// console.log(students);
-
-
-// var email_login = document.getElementById('email_login');
-// var pass_login = document.getElementById('pass_login');
-
-// function login(){
-//     console.log(data_from_l_S);
-//     var users_details = [];
-//     if(data_from_l_S == null){
-//         alert('please signup');
-//     }else{
-//           users_details =JSON.parse(local_data);
-//         // console.log(JSON.parse(local_data));
-//         for(let i=0;i<users_details.length;i++){
-//             if(email_login.value == users_details[i]){
-//                 // alert('you can login');
-//                 open('index.html');
-//             }
-//         }
-//     }
-
-    
-// }
-
