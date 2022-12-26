@@ -158,39 +158,36 @@ var r=0;
         for(let x=0;x<question_content.length;x++){
        
             if(question_type_array[x] == 'choose_question'){
-                for(let i=0;i<ques_answers_length[x].length;i++){
-                    // console.log(answers_checked[i].checked);
-                    // console.log(answers_checked[i].getAttribute('data_answer'));
-                    // console.log(check_answer_array[i]);
-                    if(answers_checked[t].checked == check_answer_array[t] && answers_checked[t].checked == true){
-                        grades++;
-                        document.write(answers_checked[t].checked);
-                        document.write(check_answer_array[t]);
-                        document.write('good');
-                    }else{
-                        console.log('bad');
-                    }
-                    t++;
-                    v++;
-                }
-            }else{
-                for(let i=0;i<ques_answers_length[x].length;i++){
-                    //console.log(answers_checked[i].checked);
-                    // console.log(answers_checked[i].getAttribute('data_answer'));
-                    //console.log(check_answer_array[i]);
-                    if(essay_answer[i].value == answers_array[v] ){
-                        grades++;
-                        console.log('good');
-                    }else{
-                        console.log('bad');
-                    }
-                    v++;
-                }
+                
+                v+=ques_answers_length[x];
+                console.log(ques_answers_length[x]);
             }
-            v++;
+            
             
         }
-        var result_text=document.createTextNode('your total score is '+ grades +'/'+question_content.length +" " );
+        for(let i=0;i<essay_answer.length;i++){
+
+            if(essay_answer[i].value == answers_array[v] ){
+                grades++;
+                console.log('good'+v+answers_array[v]);
+            }else{
+                console.log('bad');
+            }
+            v++;
+        }
+        
+        for(let i=0;i<answers_checked.length;i++){
+
+            if(answers_checked[i].checked == check_answer_array[i] && answers_checked[i].checked == true){
+                grades++;
+                console.log(answers_checked[t].checked);
+                console.log(check_answer_array[t]);
+                console.log('good');
+            }else{
+                console.log('bad');
+            }
+        }
+        var result_text=document.createTextNode('your total score is '+ grades +'/'+question_content.length +" "+v );
         result.appendChild(result_text);
         if(result.style.display== 'none'){
 
