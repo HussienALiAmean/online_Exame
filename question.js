@@ -129,6 +129,7 @@ var r=0;
                 r++;
             }else{
                 array_answers_span[g].className="essay_answer";
+                // array_answers_span[g].setAttribute('border-radius','8px');
             }
             // array_answer_text[g] = document.createTextNode(`${arrange[j]}: ${answers_array[g]}`);
             array_label_answers[g].appendChild(array_answers_span[g]);
@@ -187,7 +188,7 @@ var r=0;
                 console.log('bad');
             }
         }
-        var result_text=document.createTextNode('your total score is '+ grades +'/'+question_content.length +" "+v );
+        var result_text=document.createTextNode('your total score is '+ grades +'/'+question_content.length  );
         result.appendChild(result_text);
         if(result.style.display== 'none'){
 

@@ -70,6 +70,14 @@
     background-color: rgb(13, 248, 240);
 
 }
+.essay_answer{
+    border-radius: 7px;
+    width: 80%;
+    height: 35px;
+
+    margin: 7px;
+    padding: 5px;
+}
 body{
     background-color: blueviolet;
 }
